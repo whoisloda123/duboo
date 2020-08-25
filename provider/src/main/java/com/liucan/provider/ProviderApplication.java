@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author liucan
  * @version 2020/8/23
  */
-@EnableDubbo
+@EnableDubbo(scanBasePackages = "com.liucan.provider")
 @SpringBootApplication
 public class ProviderApplication {
     public static void main(String[] args) {
