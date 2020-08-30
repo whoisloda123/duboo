@@ -22,12 +22,17 @@ public class HelloConfig {
     }
 
     @Bean
-    public HelloValueAnnoationBeanPostProcessor helloValueAnnoationBeanPostProcessor() {
-        return new HelloValueAnnoationBeanPostProcessor();
+    public HelloValueAnnotationBeanPostProcessor helloValueAnnoationBeanPostProcessor() {
+        return new HelloValueAnnotationBeanPostProcessor();
     }
 
     @Bean
     public CountryBeanPostProcessor worldBeanPostProcessor() {
         return new CountryBeanPostProcessor();
+    }
+
+    @Bean
+    public HelloBeanDefinitionRegistryPostProcessor helloBeanDefinitionRegistryPostProcessor() {
+        return new HelloBeanDefinitionRegistryPostProcessor();
     }
 }

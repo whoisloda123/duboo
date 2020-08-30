@@ -12,7 +12,7 @@ import java.lang.reflect.Field;
  * @author liucan
  * @version 2020/8/30
  */
-public class HelloValueAnnoationBeanPostProcessor implements BeanPostProcessor {
+public class HelloValueAnnotationBeanPostProcessor implements BeanPostProcessor {
 
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
         for (Field field : bean.getClass().getDeclaredFields()) {

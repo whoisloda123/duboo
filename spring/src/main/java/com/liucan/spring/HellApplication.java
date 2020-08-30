@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.List;
+
 /**
  * @author liucan
  * @version 2020/8/30
@@ -15,5 +17,8 @@ public class HellApplication {
         System.out.println(context.getBean(World.class).toString());
 
         context.getBean(Country.class).test();
+        IHello bean = context.getBean(IHello.class);
+        List<String> userNames = bean.getUserNames();
+        System.out.println(userNames);
     }
 }
