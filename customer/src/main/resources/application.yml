@@ -12,3 +12,8 @@ dubbo:
   consumer:
     check: false
     timeout: 3000
+    onconnect: onConnection1
+    ondisconnect: onDisconnection2
+logging:
+  level:
+    org.apache.dubbo: DEBUG
