@@ -5,10 +5,8 @@ import org.springframework.beans.PropertyValues;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
-import org.springframework.cglib.proxy.MethodProxy;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Method;
 
 /**
  * https://blog.csdn.net/qq_38526573/article/details/88091702
@@ -20,18 +18,16 @@ public class CountryBeanPostProcessor implements InstantiationAwareBeanPostProce
     /**
      * bean初始化之前
      */
+    @Override
     public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
         if (beanClass == Country.class) {
             System.out.println("开始初始化：" + beanName);
             //利用cglib动态生成代理类
-            return Enhancer.create(Country.class, new MethodInterceptor() {
-                @Override
-                public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-                    System.out.println("目标方法执行前:" + method + "\n");
-                    Object object = methodProxy.invokeSuper(o, objects);
-                    System.out.println("目标方法执行后:" + method + "\n");
-                    return object;
-                }
+            return Enhancer.create(Country.class, (MethodInterceptor) (o, method, objects, methodProxy) -> {
+                System.out.println("目标方法执行前:" + method + "\n");
+                Object object = methodProxy.invokeSuper(o, objects);
+                System.out.println("目标方法执行后:" + method + "\n");
+                return object;
             });
         }
         return null;
@@ -42,6 +38,7 @@ public class CountryBeanPostProcessor implements InstantiationAwareBeanPostProce
      *
      * @return 如果为true可能会调用postProcessPropertyValues
      */
+    @Override
     public boolean postProcessAfterInstantiation(Object bean, String beanName) throws BeansException {
         return true;
     }
@@ -49,6 +46,7 @@ public class CountryBeanPostProcessor implements InstantiationAwareBeanPostProce
     /**
      * 设置bean属性
      */
+    @Override
     public PropertyValues postProcessPropertyValues(PropertyValues pvs, PropertyDescriptor[] pds, Object bean, String beanName) throws BeansException {
         return pvs;
     }

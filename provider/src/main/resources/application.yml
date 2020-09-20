@@ -13,3 +13,5 @@ dubbo:
   consumer:
     check: false
     timeout: 3000
+server:
+  port: 8081
