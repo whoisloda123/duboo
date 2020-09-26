@@ -1,5 +1,10 @@
-package com.liucan.spring;
+package com.liucan.spring.config;
 
+import com.liucan.spring.World;
+import com.liucan.spring.beandefinition.HelloBeanDefinitionRegistryPostProcessor;
+import com.liucan.spring.postprocessor.Country;
+import com.liucan.spring.postprocessor.CountryBeanPostProcessor;
+import com.liucan.spring.postprocessor.HelloValueAnnotationBeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -8,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @version 2020/8/30
  */
 @Configuration
-public class HelloConfig {
+public class CommonConfig {
     @Bean
     public World world() {
         World world = new World();

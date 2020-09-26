@@ -1,4 +1,4 @@
-package com.liucan.spring;
+package com.liucan.spring.beandefinition;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;

@@ -1,4 +1,4 @@
-package com.liucan.spring;
+package com.liucan.spring.beandefinition;
 
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.cglib.proxy.Enhancer;

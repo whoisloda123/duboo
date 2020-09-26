@@ -1,4 +1,4 @@
-package com.liucan.spring;
+package com.liucan.spring.beandefinition;
 
 import java.util.List;
 
