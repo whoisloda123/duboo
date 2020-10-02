@@ -12,11 +12,11 @@ import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import java.util.Arrays;
 
 /**
- * 作用和 {@link ImportBeanDefinitionRegistrar} 是一样的，动态注入bean，只是ImportBeanDefinitionRegistrar
- * 需要通过import引入才行
+ * 作用和 {@link ImportBeanDefinitionRegistrar} 是一样的，动态注入bean，只是需要通过import引入才行
  *
  * @author liucan
  * @version 2020/8/30
+ * @see #postProcessBeanDefinitionRegistry
  */
 public class HelloBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     /**

@@ -7,10 +7,16 @@ import java.lang.annotation.*;
  *
  * @author liucan
  * @version 2020/8/30
+ * @see HelloValueAnnotationBeanPostProcessor
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface HelloValue {
+    /**
+     * set the hello value
+     *
+     * @return value
+     */
     String value() default "";
 }

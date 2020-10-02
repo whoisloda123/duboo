@@ -1,6 +1,7 @@
 package com.liucan.spring;
 
 import com.liucan.spring.beandefinition.IHello;
+import com.liucan.spring.beandefinition.LodaScan;
 import com.liucan.spring.postprocessor.Country;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,6 +13,7 @@ import java.util.List;
  * @author liucan
  * @version 2020/8/30
  */
+@LodaScan("com.liu.spring")
 @SpringBootApplication
 public class HellApplication {
     public static void main(String[] args) {
