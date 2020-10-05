@@ -1,10 +1,12 @@
-package com.liucan.spring;
+package com.liucan.spring.mode;
 
+import com.liucan.spring.loda.LodaAutowired;
 import com.liucan.spring.postprocessor.HelloValue;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
@@ -30,7 +32,16 @@ public class World implements EnvironmentAware, ApplicationContextAware, Resourc
     @HelloValue("中国")
     private String ContoryName;
 
+    /**
+     * name that indicates which user has used
+     */
     private String userName;
+
+    @LodaAutowired
+    private Country country;
+
+    @Autowired
+    private Town town;
 
     @Override
     public void setBeanName(String name) {
@@ -44,6 +55,7 @@ public class World implements EnvironmentAware, ApplicationContextAware, Resourc
 
     @Override
     public void afterPropertiesSet() throws Exception {
+        country.test();
         System.out.println("afterPropertiesSet");
     }
 

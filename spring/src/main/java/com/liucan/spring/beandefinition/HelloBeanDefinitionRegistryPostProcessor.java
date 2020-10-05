@@ -38,6 +38,5 @@ public class HelloBeanDefinitionRegistryPostProcessor implements BeanDefinitionR
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-
     }
 }
