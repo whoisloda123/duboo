@@ -25,7 +25,10 @@ public class UniverseConfigurationSelector implements ImportSelector {
         AnnotationAttributes annotationAttributes = AnnotationAttributes
                 .fromMap(importingClassMetadata.getAnnotationAttributes(EnableUniverse.class.getName()));
         List<String> classNames = new ArrayList<>();
-        classNames.addAll(Arrays.asList(CountryBeanPostProcessor.class.getName(), HelloValueAnnotationBeanPostProcessor.class.getName()));
+        classNames.addAll(Arrays.asList(
+                CountryBeanPostProcessor.class.getName(),
+                HelloValueAnnotationBeanPostProcessor.class.getName(),
+                TownFactoryBean.class.getName()));
         if (annotationAttributes.getBoolean(HELLO_PROXY_PARAMETER)) {
             classNames.add(HelloBeanDefinitionRegistryPostProcessor.class.getName());
         }

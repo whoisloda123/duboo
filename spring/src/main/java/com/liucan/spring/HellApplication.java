@@ -2,6 +2,7 @@ package com.liucan.spring;
 
 import com.liucan.spring.loda.LodaScan;
 import com.liucan.spring.mode.Country;
+import com.liucan.spring.mode.Town;
 import com.liucan.spring.mode.World;
 import com.liucan.spring.universe.EnableUniverse;
 import com.liucan.spring.universe.IHello;
@@ -25,12 +26,14 @@ public class HellApplication {
         int beanDefinitionCount = context.getBeanFactory().getBeanDefinitionCount();
         Country bean1 = context.getBean(Country.class);
         context.getBean(Country.class).test();
-        if (context.containsBean(IHello.class.getSimpleName())) {
-            IHello bean = context.getBean(IHello.class);
-            if (bean != null) {
-                List<String> userNames = bean.getUserNames();
-                System.out.println(userNames);
-            }
+
+        //Object bean3 = context.getBean("townFactoryBean");
+        Town bean2 = context.getBean(Town.class);
+
+        IHello bean = context.getBean(IHello.class);
+        if (bean != null) {
+            List<String> userNames = bean.getUserNames();
+            System.out.println(userNames);
         }
     }
 }

@@ -6,7 +6,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.EnvironmentAware;
@@ -39,9 +38,6 @@ public class World implements EnvironmentAware, ApplicationContextAware, Resourc
 
     @LodaAutowired
     private Country country;
-
-    @Autowired
-    private Town town;
 
     @Override
     public void setBeanName(String name) {

@@ -130,17 +130,17 @@ public class LodaAutowiredAnnotationBeanPostProcessor implements InstantiationAw
             Field field = (Field) this.member;
             Object value;
             if (this.cached) {
-                value = cachedFieldValue;
+                value = this.cachedFieldValue;
             } else {
                 value = beanFactory.getBean(field.getName(), field.getType());
-                cachedFieldValue = value;
+                this.cachedFieldValue = value;
                 this.cached = true;
             }
             if (value != null) {
                 ReflectionUtils.makeAccessible(field);
                 field.set(bean, value);
             } else {
-                if (required) {
+                if (this.required) {
                     throw new BeanCreationException("Error create bean :" + beanName);
                 }
             }

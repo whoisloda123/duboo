@@ -37,7 +37,7 @@ public class LodaBeanDefinitionRegistryPostProcessor implements BeanDefinitionRe
                 this.environment,
                 this.resourceLoader);
         beanDefinitionScanner.addIncludeFilter(new AnnotationTypeFilter(Loda.class));
-        beanDefinitionScanner.scan(packagesToScan.toArray(new String[0]));
+        beanDefinitionScanner.scan(this.packagesToScan.toArray(new String[0]));
     }
 
     @Override

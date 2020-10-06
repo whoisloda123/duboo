@@ -7,5 +7,10 @@ import java.util.List;
  * @version 2020/8/30
  */
 public interface IHello {
+    /**
+     * Get user names
+     *
+     * @return user names
+     */
     List<String> getUserNames();
 }
