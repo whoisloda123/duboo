@@ -1,7 +1,7 @@
 package com.liucan.spring.mode;
 
 import com.liucan.spring.loda.LodaAutowired;
-import com.liucan.spring.postprocessor.HelloValue;
+import com.liucan.spring.universe.HelloValue;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
