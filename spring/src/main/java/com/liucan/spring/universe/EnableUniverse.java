@@ -16,8 +16,8 @@ import java.lang.annotation.*;
 @Import(UniverseConfigurationSelector.class)
 public @interface EnableUniverse {
     /**
-     * Whether create {@link IHello} proxy class
-     * default false
+     * Determine whether create {@link IHello} proxy class
+     * default {@code true}
      */
     boolean helloProxy() default true;
 }

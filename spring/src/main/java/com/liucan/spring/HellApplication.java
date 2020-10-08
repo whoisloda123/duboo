@@ -1,6 +1,8 @@
 package com.liucan.spring;
 
 import com.liucan.spring.loda.LodaScan;
+import com.liucan.spring.loda.event.LiucanLodaEvent;
+import com.liucan.spring.loda.event.LodaEventPublisher;
 import com.liucan.spring.mode.Country;
 import com.liucan.spring.mode.Town;
 import com.liucan.spring.mode.World;
@@ -16,7 +18,7 @@ import java.util.List;
  * @author liucan
  * @version 2020/8/30
  */
-@LodaScan(type = 22)
+@LodaScan
 @EnableUniverse
 @SpringBootApplication
 public class HellApplication {
@@ -35,5 +37,8 @@ public class HellApplication {
             List<String> userNames = bean.getUserNames();
             System.out.println(userNames);
         }
+
+        LodaEventPublisher lodaEventPublisher = context.getBean(LodaEventPublisher.class);
+        lodaEventPublisher.publishEvent(new LiucanLodaEvent(context, bean1));
     }
 }

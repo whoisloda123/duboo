@@ -15,12 +15,16 @@ import org.springframework.core.io.ResourceLoader;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.io.Serializable;
+import java.lang.reflect.*;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author liucan
  * @version 2020/8/30
  */
-public class World implements EnvironmentAware, ApplicationContextAware, ResourceLoaderAware, BeanNameAware, InitializingBean, DisposableBean {
+public class World<T extends Serializable> implements EnvironmentAware, ApplicationContextAware, ResourceLoaderAware, BeanNameAware, InitializingBean, DisposableBean {
 
     private ApplicationContext applicationContext;
 
@@ -65,10 +69,35 @@ public class World implements EnvironmentAware, ApplicationContextAware, Resourc
         System.out.println("PreDestroy");
     }
 
+    private List<String> list;
+    private Map<String, Country> map;
+    private T t;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         System.out.println("setApplicationContext");
         this.applicationContext = applicationContext;
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            Type genericType = field.getGenericType();
+            if (genericType instanceof ParameterizedType) {
+                ParameterizedType parameterizedType = (ParameterizedType) genericType;
+                for (Type actualTypeArgument : parameterizedType.getActualTypeArguments()) {
+                    System.out.println(actualTypeArgument.getTypeName());
+                }
+                Type ownerType = parameterizedType.getOwnerType();
+                Type rawType = parameterizedType.getRawType();
+            } else if (genericType instanceof TypeVariable) {
+                TypeVariable<?> type = (TypeVariable<?>) genericType;
+                Type[] bounds = type.getBounds();
+                GenericDeclaration genericDeclaration = type.getGenericDeclaration();
+                String typeName = type.getTypeName();
+                String name = type.getName();
+                System.out.println("fsf");
+            }
+        }
+        Type genericSuperclass = this.getClass().getGenericSuperclass();
+
     }
 
     @Override

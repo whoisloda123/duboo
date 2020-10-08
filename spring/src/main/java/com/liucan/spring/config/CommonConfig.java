@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommonConfig {
     @Bean
-    public World world() {
-        World world = new World();
+    public World<String> world() {
+        World<String> world = new World();
         world.setUserName("fsfsfs");
         return world;
     }

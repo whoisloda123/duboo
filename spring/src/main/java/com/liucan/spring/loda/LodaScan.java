@@ -1,5 +1,6 @@
 package com.liucan.spring.loda;
 
+import com.liucan.spring.loda.event.LodaEventDetermine;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.*;
@@ -9,13 +10,13 @@ import java.lang.annotation.*;
  *
  * @author liucan
  * @see LodaComponentScan
- * @see LodaType
+ * @see LodaEventDetermine
  */
 @Target(ElementType.TYPE)
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @LodaComponentScan
-@LodaType
+@LodaEventDetermine
 public @interface LodaScan {
     /**
      * Alias for {@link #basePackages()} attribute ,Allows for more concise annotation
@@ -47,10 +48,10 @@ public @interface LodaScan {
     Class<?>[] basePackageClasses() default {};
 
     /**
-     * loda type
+     * Determine whether support loda event
      *
-     * @return
+     * @return default {@code ture}
      */
-    @AliasFor(annotation = LodaType.class)
-    int type() default 0;
+    @AliasFor(annotation = LodaEventDetermine.class)
+    boolean support() default true;
 }
