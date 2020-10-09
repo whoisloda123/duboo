@@ -1,5 +1,6 @@
 package com.liucan.spring.loda.event;
 
+import com.liucan.spring.loda.LodaScan;
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
@@ -9,20 +10,22 @@ import org.springframework.core.type.AnnotationMetadata;
  *
  * @author liucan
  * @date 10/8/20 2:22 PM
- * @see LodaEventDetermine
+ * @see LodaScan
  */
 public class LodaEventSelector implements ImportSelector {
     /**
-     * {@link LodaEventDetermine} support parameter
+     * {@link LodaScan} support parameter
      */
     private static final String EVENT_DETERMINE_PARAMETER = "support";
 
     @Override
     public String[] selectImports(AnnotationMetadata importingClassMetadata) {
         AnnotationAttributes attributes = AnnotationAttributes
-                .fromMap(importingClassMetadata.getAnnotationAttributes(LodaEventDetermine.class.getName()));
+                .fromMap(importingClassMetadata.getAnnotationAttributes(LodaScan.class.getName()));
         if (attributes.getBoolean(EVENT_DETERMINE_PARAMETER)) {
-            return new String[]{LodaEventListenerRegistryPostProcessor.class.getName(), LodaEventPublisher.class.getName()};
+            return new String[]{LodaEventBeanDefinitionRegistryPostProcessor.class.getName(),
+                    CountLoda.class.getName(),
+                    TownLoda.class.getName()};
         }
         return new String[0];
     }

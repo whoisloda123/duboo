@@ -1,9 +1,6 @@
 package com.liucan.spring.loda;
 
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
-import org.springframework.beans.factory.support.BeanDefinitionBuilder;
-import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
-import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.*;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
@@ -19,6 +16,9 @@ import java.util.Set;
  * @author liucan
  */
 public class LodaBeanImportBeanDefinitionRegistrar implements ImportBeanDefinitionRegistrar {
+
+    private BeanNameGenerator beanNameGenerator = new DefaultBeanNameGenerator();
+
     @Override
     public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
         registerLodaBeanDefinitionRegistryPostProcessor(importingClassMetadata, registry);
@@ -33,7 +33,7 @@ public class LodaBeanImportBeanDefinitionRegistrar implements ImportBeanDefiniti
                 .rootBeanDefinition(LodaBeanDefinitionRegistryPostProcessor.class)
                 .addConstructorArgValue(getPackagesToScan(importingClassMetadata))
                 .getRawBeanDefinition();
-        String beanName = BeanDefinitionReaderUtils.generateBeanName(rawBeanDefinition, registry);
+        String beanName = this.beanNameGenerator.generateBeanName(rawBeanDefinition, registry);
         registry.registerBeanDefinition(beanName, rawBeanDefinition);
     }
 
@@ -44,7 +44,7 @@ public class LodaBeanImportBeanDefinitionRegistrar implements ImportBeanDefiniti
         AbstractBeanDefinition rawBeanDefinition = BeanDefinitionBuilder
                 .rootBeanDefinition(LodaAutowiredAnnotationBeanPostProcessor.class)
                 .getRawBeanDefinition();
-        String beanName = BeanDefinitionReaderUtils.generateBeanName(rawBeanDefinition, registry);
+        String beanName = this.beanNameGenerator.generateBeanName(rawBeanDefinition, registry);
         registry.registerBeanDefinition(beanName, rawBeanDefinition);
     }
 

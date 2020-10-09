@@ -13,13 +13,15 @@ import org.springframework.beans.factory.support.*;
  */
 public class HelloBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
 
+    private BeanNameGenerator beanNameGenerator = new DefaultBeanNameGenerator();
+
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
         AbstractBeanDefinition beanDefinition = BeanDefinitionBuilder
                 .rootBeanDefinition(HelloFactoryBean.class)
                 .setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE)
                 .getRawBeanDefinition();
-        String beanName = BeanDefinitionReaderUtils.generateBeanName(beanDefinition, registry);
+        String beanName = this.beanNameGenerator.generateBeanName(beanDefinition, registry);
         registry.registerBeanDefinition(beanName, beanDefinition);
     }
 

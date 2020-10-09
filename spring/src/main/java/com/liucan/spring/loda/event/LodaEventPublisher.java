@@ -46,13 +46,15 @@ public class LodaEventPublisher {
      */
     public void publishEvent(LodaEvent event, @Nullable ResolvableType eventType) {
         ResolvableType type = eventType != null ? eventType : resolveDefaultEventType(event);
-        retrieveEventListeners(type).forEach(lodaEventListener -> {
-            try {
-                lodaEventListener.onLodaEvent(event);
-            } catch (Exception e) {
-                logger.error("Handle Loda Event failed!" + e);
-            }
-        });
+        retrieveEventListeners(type).forEach(lodaEventListener -> invokeListener(lodaEventListener, event));
+    }
+
+    private void invokeListener(LodaEventListener lodaEventListener, LodaEvent event) {
+        try {
+            lodaEventListener.onLodaEvent(event);
+        } catch (Exception e) {
+            logger.error("Handle Loda Event failed!" + e);
+        }
     }
 
     /**
@@ -73,18 +75,18 @@ public class LodaEventPublisher {
      * @return event listeners collections
      */
     private Collection<LodaEventListener> retrieveEventListeners(ResolvableType eventType) {
-        return lodaEventListeners
+        return this.lodaEventListeners
                 .stream()
                 .filter(lodaEventListener -> supportsType(lodaEventListener, eventType))
                 .collect(Collectors.toSet());
     }
 
     public void addEventListener(LodaEventListener lodaEventListener) {
-        lodaEventListeners.add(lodaEventListener);
+        this.lodaEventListeners.add(lodaEventListener);
     }
 
     public Set<LodaEventListener> getLodaEventListeners() {
-        return lodaEventListeners;
+        return this.lodaEventListeners;
     }
 
     public void setLodaEventListeners(Set<LodaEventListener> lodaEventListeners) {
