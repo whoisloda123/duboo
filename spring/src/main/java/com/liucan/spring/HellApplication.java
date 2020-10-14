@@ -22,7 +22,12 @@ import java.util.List;
 @EnableUniverse
 @SpringBootApplication
 public class HellApplication {
+
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Hell application has been shut down!");
+        }));
+
         ConfigurableApplicationContext context = SpringApplication.run(HellApplication.class, args);
         System.out.println(context.getBean(World.class).toString());
         int beanDefinitionCount = context.getBeanFactory().getBeanDefinitionCount();
