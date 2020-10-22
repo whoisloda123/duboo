@@ -12,7 +12,6 @@
         <module>interface</module>
         <module>customer</module>
         <module>provider</module>
-        <module>spring</module>
     </modules>
 
     <properties>
